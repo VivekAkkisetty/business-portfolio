@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0a0b0b;
+  --signal: #c9ff64;
+  --charcoal: #111513;
+  --line: rgba(255, 255, 255, 0.12);
+  --muted: rgba(255, 255, 255, 0.45);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--ink);
+  color: #ffffff;
+  font-family: var(--font-inter), sans-serif;
+}
+::selection { background: var(--signal); color: var(--ink); }
+
+.hairline { border-color: var(--line); }
+.eyebrow { letter-spacing: 0.16em; font-size: 10px; font-weight: 600; }
+.hero-grid {
+  background-image: linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: linear-gradient(to bottom, black 0%, transparent 94%);
+}
+.hero-glow { background: radial-gradient(ellipse at center, rgba(201,255,100,.11), transparent 68%); }
+.preview-grid {
+  background-image: linear-gradient(rgba(201,255,100,.11) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,255,100,.11) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.focus-ring:focus-visible { outline: 2px solid var(--signal); outline-offset: 4px; }
+
+/* Studio ticker animation */
+@keyframes studio-marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: studio-marquee 32s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.hero-section {
+  min-height: 0 !important;
+}
+@media (min-width: 1024px) {
+  .hero-section {
+    display: grid;
+    grid-template-columns: minmax(0, 1.18fr) minmax(360px, .82fr);
+    align-items: center;
+    gap: clamp(28px, 5vw, 88px);
+    padding-top: 150px;
+    padding-bottom: 100px;
+  }
+  .hero-preview {
+    margin-top: 24px !important;
+    margin-right: 0 !important;
+  }
+  .hero-copy h1 {
+    font-size: clamp(4rem, 6.2vw, 6.8rem);
+  }
+}
+@media (max-width: 640px) {
+  .hero-section {
+    min-height: 0 !important;
+    padding-bottom: 72px !important;
+  }
+  .hero-section .hero-grid {
+    height: 560px;
+  }
+  .hero-section .hero-glow {
+    height: 420px;
+    width: 420px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
